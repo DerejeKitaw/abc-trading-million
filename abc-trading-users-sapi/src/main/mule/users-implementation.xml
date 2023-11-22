@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="get-user-by-id" doc:id="a75972b9-b016-4143-9b1f-1a894e6c7b72" >
+		<ee:transform doc:name="Transform Message">
+            <ee:variables>
+                <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+		<ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  user_id: "584a9d13e808bcf75f05f580",
+  email: "test9999@test.com",
+  given_name: "Dummy",
+  family_name: "User",
+  created_at: "2016-12-09T12:01:23.787Z",
+  updated_at: "2016-12-09T12:01:23.787Z",
+  email_verified: false
+}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+	</flow>
+	<flow name="get-all-users" doc:id="4dcd326d-dcd9-4694-9084-49057a004bb7" >
+		<ee:transform doc:name="Transform Message">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+[
+  {
+    user_id: "583c3ac3f38e84297c002546",
+    email: "test@test.com",
+    name: "test@test.com",
+    given_name: "Hello",
+    family_name: "Test",
+    nickname: "test",
+    last_ip: "94.121.163.63",
+    logins_count: 15,
+    created_at: "2016-11-28T14:10:11.338Z",
+    updated_at: "2016-12-02T01:17:29.310Z",
+    last_login: "2016-12-02T01:17:29.310Z",
+    email_verified: true
+  }, 
+  {
+    user_id: "583c5484cb79a5fe593425a9",
+    email: "test1@test.com",
+    name: "test1@test.com",
+    given_name: "Hello1",
+    family_name: "Test1",
+    nickname: "test1",
+    last_ip: "94.121.168.53",
+    logins_count: 1,
+    created_at: "2016-11-28T16:00:04.209Z",
+    updated_at: "2016-11-28T16:00:47.203Z",
+    last_login: "2016-11-28T16:00:47.203Z",
+    email_verified: true
+  }
+]]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+	</flow>
+</mule>
